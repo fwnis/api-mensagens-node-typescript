@@ -33,7 +33,7 @@ export class App {
 
   private database(): void {
     mongoose.connect(
-      "mongodb+srv://eduardofanis:221035@cluster0.lqdk9s3.mongodb.net/?retryWrites=true&w=majority"
+      "mongodb+srv://eduardofanis:ESaa4SrkRzPFyt8Z@cluster0.lqdk9s3.mongodb.net/cluster0?retryWrites=true&w=majority"
     );
   }
   private routes(): void {
