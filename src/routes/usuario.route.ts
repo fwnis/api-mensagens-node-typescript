@@ -6,6 +6,7 @@ const usuarioRoute = Router();
 
 usuarioRoute.post("/cadastro", usuarioController.cadastrar);
 usuarioRoute.post("/login", usuarioController.autenticar);
+usuarioRoute.post("/autenticar", authMiddleware.autorizarUsuarioByToken);
 usuarioRoute.get(
   "/:id",
   authMiddleware.autorizarUsuarioByToken,
