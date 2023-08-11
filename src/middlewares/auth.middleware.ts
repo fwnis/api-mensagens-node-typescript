@@ -43,8 +43,7 @@ class AuthMiddleware {
   }
   public async verificarToken(
     req: Request,
-    res: Response,
-    next: NextFunction
+    res: Response
   ): Promise<Response | void> {
     const token = req.headers["x-access-token"];
     if (!token) {
@@ -62,7 +61,9 @@ class AuthMiddleware {
     try {
       const decoded = jwt.verify(token, "SECRET") as UsuarioInterface;
       req.usuario = decoded;
-      return next();
+      return res.status(200).send({
+        message: "Token válido.",
+      });
     } catch (error) {
       return res.status(401).send({
         message: "Token inválido.",
