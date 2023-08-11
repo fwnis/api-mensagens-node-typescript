@@ -41,6 +41,34 @@ class AuthMiddleware {
       });
     }
   }
+  public async verificarToken(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    const token = req.headers["x-access-token"];
+    if (!token) {
+      return res.status(401).send({
+        message: "Acesso Restrito.",
+      });
+    }
+
+    if (typeof token !== "string") {
+      return res.status(401).send({
+        message: "Token inválido.",
+      });
+    }
+
+    try {
+      const decoded = jwt.verify(token, "SECRET") as UsuarioInterface;
+      req.usuario = decoded;
+      return next();
+    } catch (error) {
+      return res.status(401).send({
+        message: "Token inválido.",
+      });
+    }
+  }
 
   public async autorizarUsuarioByParams(
     req: Request,
