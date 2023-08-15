@@ -40,7 +40,10 @@ class UsuarioControler {
   }
 
   public getById(req: Request, res: Response): Response {
-    return res.json(req.usuarioChat);
+    const formatedRes = Array(req.usuarioChat).flatMap(
+      ({ _id, nome, avatar }) => [{ _id: _id, nome: nome, avatar: avatar }]
+    );
+    return res.json(formatedRes);
   }
 
   public async listar(req: Request, res: Response): Promise<Response> {

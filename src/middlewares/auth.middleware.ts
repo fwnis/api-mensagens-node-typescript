@@ -77,7 +77,9 @@ class AuthMiddleware {
     next: NextFunction
   ): Promise<Response | void> {
     try {
-      const usuario = await usuarioModel.findById(req.params.id);
+      const usuario = await usuarioModel.findOne({
+        nome: req.params.id,
+      });
 
       if (!usuario) {
         return res.status(400).send({
