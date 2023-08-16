@@ -17,7 +17,7 @@ class MensagemController {
 
     const mensagens = await mensagemModel
       .buscaChat(idUsuarioLogado, idUsuarioChat)
-      .sort("-createdAt"); // (-) reverse messages
+      .sort("-createdAt"); // (-) reverse messages order to chatbox bottom to top
 
     const mensagensChat = mensagens.map((mensagem) => {
       return {
